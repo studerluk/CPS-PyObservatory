@@ -80,16 +80,29 @@ class Universe:
 		milky.addPlanet(p2)
 		"""
 
-		sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
-
 		milky = SolarSystem()
+		sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
 		milky.addPlanet(sun)
+
 		for i in range(15):
 			pos = Vector(randint(-450, 450), randint(-450, 450))
 			v = Vector(randint(-10,10), randint(-10, 10))
 			mass = randint(0, 750)
 			meteor = Planet("planet"+str(i), pos, v, mass, None)
 			milky.addPlanet(meteor)
+
+		"""
+		milky = SolarSystem()
+		sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
+		milky.addPlanet(sun)
+
+		for i in range(15):
+			pos = Vector(i*20 + 20, 0)
+			v = Vector(0, 10)
+			mass = randint(0, 750)
+			meteor = Planet("planet"+str(i), pos, v, mass, None)
+			milky.addPlanet(meteor)
+		"""
 
 
 		"""
