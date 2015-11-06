@@ -61,62 +61,61 @@ class Vector:
 
 class Universe:
 
-	def __init__(self):
+	def __init__(self, id):
 		window = turtle.Screen()
 		window.colormode(255)
 
-		"""
-		sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
-		earth = Planet("earth", Vector(50, 0), Vector(0, 10), 10000, None)
-		mars = Planet("mars", Vector(100, 0), Vector(0, 20), 10000, None)
-		p1 = Planet("p1", Vector(155, 0), Vector(0, 7), 1000, None)
-		p2 = Planet("p2", Vector(275, 0), Vector(0, -20), 100000, None)
+		if id == 0:
+			sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
+			earth = Planet("earth", Vector(50, 0), Vector(0, 10), 10000, None)
+			mars = Planet("mars", Vector(100, 0), Vector(0, 20), 10000, None)
+			p1 = Planet("p1", Vector(155, 0), Vector(0, 7), 5000, None)
+			p2 = Planet("p2", Vector(275, -50), Vector(0, 10), 200000, None)
 
-		milky = SolarSystem()
-		milky.addPlanet(sun)
-		milky.addPlanet(earth)
-		milky.addPlanet(mars)
-		milky.addPlanet(p1)
-		milky.addPlanet(p2)
-		"""
-
-		milky = SolarSystem()
-		sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
-		milky.addPlanet(sun)
-
-		for i in range(15):
-			pos = Vector(randint(-450, 450), randint(-450, 450))
-			v = Vector(randint(-10,10), randint(-10, 10))
-			mass = randint(0, 750)
-			meteor = Planet("planet"+str(i), pos, v, mass, None)
-			milky.addPlanet(meteor)
-
-		"""
-		milky = SolarSystem()
-		sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
-		milky.addPlanet(sun)
-
-		for i in range(15):
-			pos = Vector(i*20 + 20, 0)
-			v = Vector(0, 10)
-			mass = randint(0, 750)
-			meteor = Planet("planet"+str(i), pos, v, mass, None)
-			milky.addPlanet(meteor)
-		"""
+			milky = SolarSystem()
+			milky.addPlanet(sun)
+			milky.addPlanet(earth)
+			milky.addPlanet(mars)
+			milky.addPlanet(p1)
+			milky.addPlanet(p2)
 
 
-		"""
-		p1 = Planet("p1", Vector(100, -50), Vector(0, 15), 2000000, None)
-		p2 = Planet("p2", Vector(-100, 50), Vector(0, -15), 2000000, None)
+		elif id == 1:
+			milky = SolarSystem()
+			sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
+			milky.addPlanet(sun)
 
-		milky = SolarSystem()
-		milky.addPlanet(p1)
-		milky.addPlanet(p2)
-		"""
+			for i in range(25):
+				pos = Vector(randint(-450, 450), randint(-450, 450))
+				v = Vector(randint(-10,10), randint(-10, 10))
+				mass = randint(0, 1000)
+				meteor = Planet("planet"+str(i), pos, v, mass, None)
+				milky.addPlanet(meteor)
+
+
+		elif id == 2:
+			milky = SolarSystem()
+			sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
+			milky.addPlanet(sun)
+
+			for i in range(15):
+				pos = Vector(i*30 + 30, 0)
+				v = Vector(0, ((1)**i) * 10)
+				mass = randint(0, 750)
+				meteor = Planet("planet"+str(i), pos, v, mass, None)
+				milky.addPlanet(meteor)
+
+
+		elif id == 3:
+			p1 = Planet("p1", Vector(100, -50), Vector(0, 15), 2000000, None)
+			p2 = Planet("p2", Vector(-100, 50), Vector(0, -15), 2000000, None)
+
+			milky = SolarSystem()
+			milky.addPlanet(p1)
+			milky.addPlanet(p2)
 
 		for i in range(0, 10000):
 			milky.tick()
-			#print("-----")
 
 		turtle.getscreen()._root.mainloop()
 
@@ -237,10 +236,10 @@ class SolarSystem:
 			self.calcGravity(planet)
 
 		for planet in system:
-			self.detectCollision()
 			if not ("sun" in planet.name or "meteor" == planet.name[:-2]):
 				planet.move()
+		self.detectCollision()
 
 # --- SolarSystem end ---
 
-test = Universe()
+test = Universe(1)
