@@ -11,53 +11,60 @@ from random import randint
 # Vector * scalar
 # other way around does not work
 class Vector:
-	def __init__(self, x=0, y=0):
+	def __init__(self, x=0, y=0, z=0):
 		self._x = x
 		self._y = y
+		self._z = z
 
 	def __abs__(self):
-		F = math.sqrt(pow(self._x,2) + pow(self._y,2))
+		F = math.sqrt(pow(self._x,2) + pow(self._y,2) + pow(self._z,2))
 		return F
 
 	def __add__(self, other):
 		x = self._x + other.getX()
 		y = self._y + other.getY()
-		return Vector(x, y)
+		z = self._z + other.getZ()
+		return Vector(x, y, z)
 
 	def __sub__(self, other):
 		x = self._x - other.getX()
 		y = self._y - other.getY()
-		return Vector(x, y)
+		z = self._z - other.getZ()
+		return Vector(x, y, z)
 
 	def __mul__(self, other):
 		x = self._x * other
 		y = self._y * other
-		return Vector(x,y)
+		z = self._z * other
+		return Vector(x, y, z)
 
 	def __truediv__(self, other):
 		if not other == 0:
 			x = self._x / other
 			y = self._y / other
-			return Vector(x,y)
+			z = self._z / other
+			return Vector(x, y, z)
 		else:
 			raise
 
 	def __str__(self):
-		line = str(self._x) + "|" + str(self._y)
+		line = "%s | %s | %s" % (self._x, self._y, self._z)
 		return line
 
 	def __eq__(self, other):
 		eqX = (self._x == other.getX())
 		eqY = (self._y == other.getY())
-		# eqF = (abs(self) == abs(other))
-		# return (eqX and eqY and eqF)
-		return (eqX and eqY)
+		eqZ = (self._z == other.getZ())
+		return (eqX and eqY and eqZ)
 
 	def getX(self):
 		return self._x
 
 	def getY(self):
 		return self._y
+
+	def getZ(self):
+		return self._z
 
 class Universe:
 
@@ -82,12 +89,12 @@ class Universe:
 
 		elif id == 1:
 			milky = SolarSystem()
-			sun = Planet("sun", Vector(0, 0), Vector(0, 0), 1000000, None)
+			sun = Planet("sun", Vector(), Vector(), 1000000, None)
 			milky.addPlanet(sun)
 
 			for i in range(25):
-				pos = Vector(randint(-450, 450), randint(-450, 450))
-				v = Vector(randint(-10,10), randint(-10, 10))
+				pos = Vector(randint(-450, 450), randint(-450, 450), randint(-450, 450))
+				v = Vector(randint(-10,10), randint(-10, 10), randint(-10,10))
 				mass = randint(0, 1000)
 				meteor = Planet("planet"+str(i), pos, v, mass, None)
 				milky.addPlanet(meteor)
@@ -238,6 +245,7 @@ class SolarSystem:
 		for planet in system:
 			if not ("sun" in planet.name or "meteor" == planet.name[:-2]):
 				planet.move()
+
 		self.detectCollision()
 
 # --- SolarSystem end ---
