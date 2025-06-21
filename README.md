@@ -1,6 +1,10 @@
 # Celestial Physics Simulation - Planetary Observatory (Python)
 
-A simple 3D n-body simulation
+> This project was first developed in 2015 and later published in 2025.
+
+A simple 3D n-body simulation.
+
+![](doc/demo.png)
 
 ## Requirements
 
